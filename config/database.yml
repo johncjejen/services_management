@@ -1,0 +1,25 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: <%= ENV["LOCAL_DATABASE" %>
+  host: localhost
+
+
+development:
+  <<: *default
+  database: services_database
+
+  
+test:
+  <<: *default
+  database: services_management_test
+
+production:
+  <<: *default
+  database: services_database_production
+  username: services_management
+  password: <%= ENV["SERVICES_MANAGEMENT_DATABASE_PASSWORD"] %>

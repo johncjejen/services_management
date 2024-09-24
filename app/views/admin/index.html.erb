@@ -1,0 +1,39 @@
+<%= form_with(model: @user, url: admin_index_path, method: :post) do |f|%>
+    <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+            <%= f.email_field :email, placeholder: "Email"%>
+            <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+            </span>
+        </div>
+    </div>
+    <div class="field">
+        <div class="select">
+            <%= f.select :role, User.roles.keys.map { |w| [w.humanize, w]}, include_blank: "Select a role" %>
+        </div>
+    </div>
+
+    <br/>
+    <div class="field">
+        
+        <%= f.password_field :password, placeholder: "Password" %>
+    </div>
+    <div class="field">
+        <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>
+    </div>
+    
+    <%= f.submit "Create",  class: "button" %>
+<% end %>
+
+<% @users.each do |user| %>
+    <%= form_for(user, url: admin_path(user), remote:true, method: :patch) do |f|%>
+        <p><%= f.text_field :email %> - <%= f.select(:role, User.roles.keys.map { |w| [w.humanize, w]}) %> - <%= f.submit "Update" %>
+    <% end %>
+<% end %>
+
+<%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete } %>
+
