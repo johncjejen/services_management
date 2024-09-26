@@ -14,3 +14,10 @@
  *= require_self
  */
  @import "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css";
+ .section {
+    min-height: 100vh; /* Asegura que la sección ocupe el 100% de la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

@@ -1,0 +1,67 @@
+<style>
+  .section {
+  min-height: 100vh; /* Asegura que la sección ocupe el 100% de la altura de la ventana */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+</style>
+<html>
+  <head>
+    <title>Login</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-4">
+
+            <!-- Cuadro del formulario -->
+            <div class="box">
+              <h1 class="title has-text-centered">Login</h1>
+
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="field">
+                  <label class="label">Email</label>
+                  <div class="control">
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                  </div>
+                </div>
+                
+
+                <div class="field">
+                  <label class="label">Password</label>
+                  <div class="control">
+                    <%= f.password_field :password, autocomplete: "current-password" %>
+                  </div>
+                </div>
+
+                <% if devise_mapping.rememberable? %>
+                  <div class="field">
+                    <div class="control"> 
+                      <label class="label">Remember me</label>
+                      <%= f.check_box :remember_me %>
+                    </div>
+                  </div>
+                <% end %>
+
+                <div class="field">
+                  <div class="control"> 
+                    <%= f.submit "Log in" %>
+                  </div>
+                </div>
+              <% end %>
+
+            </div>
+              <%= render "devise/shared/links" %>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
